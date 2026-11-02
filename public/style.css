@@ -737,3 +737,42 @@ html, body {
 .modal-card::-webkit-scrollbar-thumb, .fortune-scroll-card::-webkit-scrollbar-thumb {
   background: rgba(212, 175, 55, 0.4); border-radius: 3px;
 }
+
+
+/* =====================================================================
+   3D 무대 모드 (scene3d/stage.js)
+   ===================================================================== */
+.temple3d-canvas { position: absolute; inset: 0; z-index: 0; display: block; }
+.mode-3d .temple-bg,
+.mode-3d .buddha-halo-glow,
+.mode-3d .buddha-statue,
+.mode-3d .incense-beam,
+.mode-3d #particle-canvas { display: none !important; }
+.mode-badge { background: linear-gradient(135deg, #d4af37, #a8741a); color: #2a1a06; }
+
+/* 3D 신도 이름표 — 머리 위에 떠 있는 작은 명찰 */
+.devotee-seat.seat-3d {
+  left: 0; top: 0;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  pointer-events: none;
+}
+.devotee-seat.seat-3d .devotee-name-badge {
+  margin-top: 0;
+  background: rgba(10, 6, 4, 0.62);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+.devotee-seat.seat-3d .devotee-badge-name { font-size: 10px; }
+.devotee-seat.seat-3d .speech-bubble { bottom: calc(100% + 6px); }
+
+/* 3D 행렬 신도 — 이름표만 (몸은 3D 모델) */
+.mode-3d .walking-devotee-container {
+  left: 0 !important; top: 0 !important;
+  transition: opacity 0.6s !important;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+.mode-3d .walking-sprite { display: none; }
+.mode-3d .walking-nametag { margin-top: 0; box-shadow: 0 0 14px rgba(212, 175, 55, 0.45); }

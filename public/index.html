@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- 3D 무대 (three.js — 로컬 vendor 폴더, 인터넷 없이 동작) -->
+  <script type="importmap">
+  { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+  </script>
 </head>
 <body>
 
@@ -20,6 +24,7 @@
         <span class="tiktok-badge">틱톡</span>
         <span>LIVE 복운수호 온라인 사찰 — 향 공양</span>
         <span class="ratio-badge">9:16</span>
+        <span class="ratio-badge mode-badge" id="mode-badge">3D</span>
       </div>
       <div class="window-controls">
         <button class="win-btn" id="btn-open-connect" title="설정 및 연결">⚙ 설정 &amp; 연결</button>
@@ -265,8 +270,9 @@
   <!-- Audio, Particles, and Application Scripts -->
   <script src="audio.js"></script>
   <script src="particles.js"></script>
-  <script src="assets/images.js"></script>
   <script src="app.js"></script>
+  <!-- 3D 대웅전 무대 (WebGL 불가 시 자동으로 2D 사진 무대로 전환) -->
+  <script type="module" src="scene3d/stage.js"></script>
 
 </body>
 </html>

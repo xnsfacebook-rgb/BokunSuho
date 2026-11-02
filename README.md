@@ -8,6 +8,28 @@
 
 ## ✨ 주요 기능
 
+### 0. 🆕 실시간 3D 대웅전 (three.js)
+무대 전체가 **실시간 3D**로 바뀌었습니다. 모든 모델은 이미지 파일 없이 코드로 직접 빚었습니다.
+
+| 모델 | 디테일 |
+|---|---|
+| **금동 석가여래좌상** | SDF(점토 조형) 방식으로 다리·몸통·팔·머리가 매끄럽게 이어진 몸체, 항마촉지인, 우견편단 법의 주름, 군청빛 나발 1,400여 개, 육계·계주·백호, 긴 귓불, 삼도, 반쯤 감은 눈 |
+| **광배 · 연화대좌** | 불꽃무늬 거신광배 + 두광·신광 동심원 + 화불 7구, 앙련 2겹 · 연밥 띠 · 팔각 중대석(안상) · 복련 · 하대석 |
+| **대웅전** | 3단 장대석 기단과 소맷돌 계단, 배흘림기둥, 빛이 새어나오는 꽃살문, 단청 창방·평방, 다포식 공포, 처마 곡선과 추녀가 치켜 올라간 곡선 지붕, 서까래·막새, 용마루·취두·잡상, 풍경, 「大雄殿」 현판 |
+| **한복 신도 48명** | 관절 리그(골반·허리·가슴·목·머리·팔·다리), 저고리·깃·동정·고름·끝동, 치마 스란단 금박(여) / 두루마기·바지·대님(남), 쪽머리와 금비녀, 흰 버선 |
+| **동작** | 꿇어앉아 합장 · 숨쉬기 · 큰절(이마를 바닥에) · 향을 들고 걷기 · 향을 이마 높이로 받들기 |
+| **향로 · 공양** | 청동 삼족 향로(녹청·운문 띠·양 귀), 석조 향로대, 놋 촛대와 일렁이는 촛불, 과일 공양 굽다리 접시 |
+| **마당** | 팔각 석등 4기(화사석 불빛), 오색 연등 줄, 박석 마당, 붉은 융단, 적송, 겹겹 산, 보름달·별·은하수 |
+| **효과** | 소용돌이치며 피어오르는 향 연기, 금빛 사리광, 3D 연꽃잎 비, 블룸 후광 |
+
+- 선물을 받으면 신도가 **붉은 융단을 걸어 올라와** 향로 앞에 꿇어앉고 → 향을 이마 높이로 받들어 → **향로에 꽂으면** 연기가 크게 피어오르고 → **큰절**을 올리면 범종이 울리며 법당의 모든 신도가 함께 절합니다.
+- 이름표와 댓글 말풍선은 각 신도의 머리 위 3D 위치를 따라다닙니다.
+- **WebGL 을 쓸 수 없는 환경**에서는 자동으로 기존 2D 사진 무대로 전환됩니다.
+
+**주소 옵션**
+- `http://localhost:3000/?q=low` — 저사양 모드 (그림자·블룸 끔, 해상도 1배) : 방송 송출 PC 가 무거울 때
+- `http://localhost:3000/?2d` — 기존 2D 사진 무대 강제 사용
+
 ### 1. 9:16 세로 무대 (틱톡 LIVE & Electron)
 - 1080x1920 / 540x960 세로 규격 — 휴대폰 틱톡 LIVE 화면과 완벽 호환
 - **Electron** 데스크톱 앱으로 바로 실행하거나 **OBS Studio / 틱톡 LIVE Studio** 브라우저 소스로 사용
@@ -88,8 +110,20 @@ bokunsuho/
 │   ├── style.css       # 단청 테마 스타일
 │   ├── app.js          # 무대 엔진 + 한복 신도 SVG + 24괘
 │   ├── audio.js        # 범종/목탁/점통/명상음 신디사이저
-│   ├── particles.js    # 연꽃잎/향 연기/성광 파티클
+│   ├── particles.js    # (2D 모드) 연꽃잎/향 연기/성광 파티클
+│   ├── scene3d/        # 🆕 3D 무대
+│   │   ├── stage.js    #   렌더러·카메라·조명·배치·향 공양 의식 애니메이션 (window.temple3D API)
+│   │   ├── buddha.js   #   금동 석가여래좌상 · 광배 · 연화대좌
+│   │   ├── sculpt.js   #   SDF 조형 → 마칭큐브 메쉬
+│   │   ├── devotee.js  #   한복 신도 리그 + 자세 (합장/큰절/걷기/향 올리기)
+│   │   ├── temple.js   #   대웅전 · 곡선 지붕 · 공포 · 석등 · 연등 · 밤하늘
+│   │   ├── altar.js    #   청동 향로 · 촛대 · 공양물
+│   │   ├── effects.js  #   향 연기 · 금빛 사리광 · 연꽃잎 비
+│   │   ├── textures.js #   단청 · 꽃살문 · 기와 · 박석 · 융단 등 절차적 텍스처
+│   │   └── util.js
+│   ├── vendor/three/   # three.js r170 (MIT) — 인터넷 없이 동작하도록 로컬 포함
 │   └── assets/
+│       ├── images.js      # (2D 모드) 사진 에셋 — WebGL 불가 시에만 불러옴
 │       └── temple_bg.svg  # 손그림 한국 사찰 배경 (대웅전·석등·연등·홍융단·향로)
 ├── audio/              # 배경 음악 폴더 (직접 추가)
 └── start.sh / start_electron.sh
@@ -100,7 +134,7 @@ bokunsuho/
 ## 📝 참고
 
 - 점괘 24괘의 괘사·풀이는 이 프로젝트를 위해 새로 지은 오리지널 한국어 텍스트입니다.
-- 배경·신도는 코드로 직접 그린 SVG라 이미지 파일이 필요 없고 가볍습니다.
+- 3D 모델은 모두 코드로 생성되므로 별도 3D 파일(.glb 등)이 필요 없습니다. 불상 몸체는 시작할 때 약 1초 동안 조형됩니다.
 
 ---
 
@@ -111,5 +145,7 @@ Sân khấu chùa online phong cách Hàn Quốc cho TikTok LIVE, khung dọc 9:
 **Chạy:** `npm install` rồi `./start_electron.sh` (app desktop) hoặc `node server.js` rồi mở `http://localhost:3000` (trình duyệt / nguồn Browser trong OBS 1080×1920).
 
 **Kết nối TikTok:** không cần API key — bấm ⚙ 설정 & 연결, nhập `@username` hoặc link phòng LIVE.
+
+**🆕 Sân khấu 3D (three.js):** toàn bộ cảnh đã chuyển sang 3D thời gian thực, mọi mô hình đều dựng bằng code (không cần file ảnh/3D): tượng Phật Thích Ca dát vàng ngồi kiết già bắt ấn xúc địa (thân tạc bằng SDF mượt như nặn đất, 1.400+ lọn tóc xoắn ốc, nhục kế, bạch hào, dái tai dài, ba ngấn cổ), hào quang hình lửa + toà sen 2 lớp, chánh điện Daeungjeon (bệ đá 3 cấp, cột bụng phình, cửa hoa văn hắt sáng, dancheong, đấu củng, mái cong vểnh góc, ngói đầu tròn, biển 大雄殿), 48 tín đồ hanbok có khớp xương (quỳ chắp tay, thở, lạy sát đất, cầm hương đi, nâng hương ngang trán), lư hương đồng ba chân, đèn đá, dây đèn hoa sen, trăng rằm, khói hương xoáy, mưa cánh sen 3D. Khi nhận quà: tín đồ đi trên thảm đỏ → quỳ → nâng hương → cắm vào lư → lạy, chuông vang, cả chánh điện cùng lạy. Máy không có WebGL sẽ tự quay về bản 2D cũ. Thêm `?q=low` để giảm tải (tắt bóng & bloom), `?2d` để ép dùng bản 2D.
 
 **Tính năng:** 48 tín đồ hanbok hướng về Phật, tặng quà → rước 3 nén hương lên thảm đỏ quỳ lạy + thỉnh chuông 범종, comment chứa `점괘/관음점/신점/운세/뽑기` → gieo quẻ (24 quẻ Hàn tự soạn), 공덕함 top 10, like → mưa cánh sen, chế độ mô phỏng demo.

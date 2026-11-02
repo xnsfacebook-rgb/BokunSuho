@@ -61,6 +61,9 @@ function devoteeBowingImg() {
 
 class BokunSuhoApp {
   constructor() {
+    // 3D 무대 (scene3d/stage.js) 가 준비되면 3D, 아니면 2D 사진 무대
+    this.t3d = window.temple3D || null;
+    this.is3D = !!this.t3d;
     this.seats = [];
     this.totalSeats = 48; // 24 left, 24 right (6 rows x 4 cols per side)
     this.devoteesMap = new Map(); // uniqueId -> { seatIndex, user, lastActive }
@@ -83,6 +86,7 @@ class BokunSuhoApp {
     this.initAudioAndControls();
     this.initWebSocket();
     this.loadInitialDevotees();
+    if (this.is3D) this.init3DOverlay();
 
     if (window.location.search.includes('modal')) {
       this.toggleModal(true);
@@ -101,10 +105,14 @@ class BokunSuhoApp {
 
   initDOM() {
     this.sanctuaryEl = document.getElementById('devotees-sanctuary');
-    const buddhaImg = document.getElementById('buddha-statue');
-    if (buddhaImg && typeof BOKUN_IMAGES !== 'undefined') buddhaImg.src = BOKUN_IMAGES.buddha;
-    const bgImg = document.getElementById('temple-bg');
-    if (bgImg && typeof BOKUN_IMAGES !== 'undefined' && BOKUN_IMAGES.bg) bgImg.src = BOKUN_IMAGES.bg;
+    if (!this.is3D) {
+      const buddhaImg = document.getElementById('buddha-statue');
+      if (buddhaImg && typeof BOKUN_IMAGES !== 'undefined') buddhaImg.src = BOKUN_IMAGES.buddha;
+      const bgImg = document.getElementById('temple-bg');
+      if (bgImg && typeof BOKUN_IMAGES !== 'undefined' && BOKUN_IMAGES.bg) bgImg.src = BOKUN_IMAGES.bg;
+    }
+    const modeBadge = document.getElementById('mode-badge');
+    if (modeBadge) modeBadge.textContent = this.is3D ? '3D' : '2D';
     this.statusActionEl = document.getElementById('status-action-text');
     this.statusDotEl = document.getElementById('status-indicator-dot');
     this.statusBadgeEl = document.getElementById('status-right-badge');
@@ -188,13 +196,13 @@ class BokunSuhoApp {
       el.style.left = `${seat.x}%`;
       el.style.top = `${seat.y}%`;
       el.style.zIndex = Math.round(seat.y * 10);
+      if (this.is3D) { el.style.left = '0'; el.style.top = '0'; }
       el.style.transform = `translate(-50%, -100%) scale(${seat.scale.toFixed(2)})`;
       el.style.display = 'none';
 
+      if (this.is3D) el.classList.add('seat-3d');
       el.innerHTML = `
-        <div class="devotee-sprite-wrap">
-          ${devoteeSeatedImg()}
-        </div>
+        ${this.is3D ? '' : `<div class="devotee-sprite-wrap">${devoteeSeatedImg()}</div>`}
         <div class="devotee-name-badge">
           <div class="devotee-badge-avatar">신</div>
           <span class="devotee-badge-name">신도</span>
@@ -207,6 +215,15 @@ class BokunSuhoApp {
   }
 
   initParticleEngine() {
+    if (this.is3D) {
+      // 3D 무대의 향 연기 · 연꽃잎 비로 연결
+      const t = this.t3d;
+      this.particles = {
+        boostIncense: (ms) => t.boostIncense(ms),
+        burstLotusShower: (n = 3) => t.burstLotusShower(Math.max(10, n * 5)),
+      };
+      return;
+    }
     const canvas = document.getElementById('particle-canvas');
     if (canvas && window.ParticleSystem) {
       this.particles = new window.ParticleSystem(canvas);
@@ -390,6 +407,32 @@ class BokunSuhoApp {
     this.addGiftAlert({ nickname: '장수아', initials: 'ㅈㅅ', giftName: '향', giftIcon: '🌹', count: 1 });
   }
 
+  // =========================================================================
+  // 3D 오버레이 — 신도 머리 위 이름표 · 말풍선 · 행렬 이름표를 3D 위치에 맞춰 이동
+  // =========================================================================
+  init3DOverlay() {
+    const t = this.t3d;
+    const anchor = {};
+    const els = this.seats.map((s) => s.element);
+    this.t3d.onFrame(() => {
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (!this.seats[i].occupiedBy) continue;
+        t.seatAnchor(i, anchor);
+        if (!anchor.visible) { el.style.visibility = 'hidden'; continue; }
+        el.style.visibility = '';
+        el.style.transform = `translate3d(${anchor.x.toFixed(1)}px, ${anchor.y.toFixed(1)}px, 0) translate(-50%, -100%) scale(${anchor.scale.toFixed(3)})`;
+        el.style.zIndex = String(2000 - Math.round(anchor.depth * 40));
+      }
+      if (this.walkingActor && this.walkingActor.style.display !== 'none') {
+        t.walkerAnchor(anchor);
+        if (anchor.visible) {
+          this.walkingActor.style.transform = `translate3d(${anchor.x.toFixed(1)}px, ${anchor.y.toFixed(1)}px, 0) translate(-50%, -100%) scale(${anchor.scale.toFixed(3)})`;
+        }
+      }
+    });
+  }
+
   getInitials(name) {
     if (!name) return '신도';
     const clean = name.trim().replace(/\s+/g, '');
@@ -400,6 +443,11 @@ class BokunSuhoApp {
     const seat = this.seats[seatIndex];
     if (!seat) return;
 
+    if (this.is3D) {
+      const prev = seat.occupiedBy;
+      if (prev && prev.uniqueId !== user.uniqueId) this.t3d.restyleSeat(seatIndex); // 새 신도 → 새 한복
+      else this.t3d.showSeat(seatIndex);
+    }
     seat.occupiedBy = user;
     this.devoteesMap.set(user.uniqueId, {
       seatIndex,
@@ -482,6 +530,36 @@ class BokunSuhoApp {
     const count = giftData.repeatCount || 1;
     const coins = (giftData.diamondCount || 1) * count;
     const colors = HANBOK_PALETTE[Math.floor(Math.random() * HANBOK_PALETTE.length)];
+
+    if (this.is3D) {
+      this.ceremonyQueue = (this.ceremonyQueue || 0) + 1;
+      const showStart = () => {
+        this.walkingNametag.textContent = `${nickname} — 향 공양`;
+        this.walkingActor.style.display = 'flex';
+        this.walkingActor.style.opacity = '1';
+        if (this.ceremonyToast) {
+          this.ceremonyToast.textContent = `🙏 신도 ${nickname}님이 부처님께 마음의 향을 올리고 있습니다 🙏`;
+          this.ceremonyToast.classList.add('show');
+        }
+        window.templeAudio?.playIncenseChime();
+      };
+      this.t3d.ceremony({
+        onStart: showStart,
+        onBow: () => {
+          window.templeAudio?.playBell(coins >= 5 ? 0.9 : 1.0);
+          window.templeAudio?.playWoodenFish();
+          this.triggerCenterPopup(coins >= 10 ? '🪷' : (coins >= 5 ? '🔔' : '🌹'), count, `신도 ${nickname} 향 공양`);
+          this.bowAllDevotees();
+          if (coins >= 10) this.particles?.burstLotusShower(8);
+        },
+        onDone: () => {
+          this.ceremonyQueue = Math.max(0, this.ceremonyQueue - 1);
+          this.walkingActor.style.display = 'none';
+          if (this.ceremonyToast && this.ceremonyQueue === 0) this.ceremonyToast.classList.remove('show');
+        },
+      });
+      return;
+    }
 
     this.walkingNametag.textContent = `${nickname} — 향 공양`;
     if (this.ceremonyToast) {
@@ -568,6 +646,7 @@ class BokunSuhoApp {
   }
 
   bowSeat(seatIndex) {
+    if (this.is3D) this.t3d.bowSeat(seatIndex);
     const seat = this.seats[seatIndex];
     if (seat && seat.element) {
       seat.element.classList.remove('bowing');
@@ -581,6 +660,7 @@ class BokunSuhoApp {
   }
 
   bowAllDevotees() {
+    if (this.is3D) { this.t3d.bowAll(); return; }
     this.seats.forEach((seat, idx) => {
       if (seat.occupiedBy) {
         setTimeout(() => this.bowSeat(idx), (seat.row * 80) + (Math.random() * 70));
@@ -1026,6 +1106,16 @@ class BokunSuhoApp {
 }
 
 // Start application on page load
+// 3D 무대(모듈)는 DOMContentLoaded 이전에 실행됩니다.
+// WebGL 을 쓸 수 없으면 2D 사진 무대 이미지(assets/images.js)를 불러와 기존 방식으로 시작합니다.
 window.addEventListener('DOMContentLoaded', () => {
-  window.bokunApp = new BokunSuhoApp();
+  if (window.temple3D) {
+    window.bokunApp = new BokunSuhoApp();
+    return;
+  }
+  document.documentElement.classList.add('mode-2d');
+  const s = document.createElement('script');
+  s.src = 'assets/images.js';
+  s.onload = s.onerror = () => { window.bokunApp = new BokunSuhoApp(); };
+  document.head.appendChild(s);
 });
