@@ -73,6 +73,18 @@ class TempleAudio {
       }
     } catch (err) {
       console.warn('음악 목록을 불러올 수 없습니다:', err);
+      // Static hosting (e.g. Cloudflare Pages) has no /api — try the
+      // bundled meditation track in public/audio/ if the owner uploaded it.
+      try {
+        const probe = await fetch('audio/%EB%B2%94%EC%A2%85%EB%AA%85%EC%83%81_10%EB%B6%84.mp3', { method: 'HEAD' });
+        if (probe.ok) {
+          this.tracks = [{ title: '범종명상_10분', url: 'audio/범종명상_10분.mp3' }];
+          if (!this.currentTrackUrl) {
+            this.currentTrackUrl = this.tracks[0].url;
+            this.currentTrackTitle = this.tracks[0].title;
+          }
+        }
+      } catch (_) { /* fall back to synthetic bell ambient */ }
     }
     return this.tracks;
   }

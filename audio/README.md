@@ -12,3 +12,6 @@ Thả file nhạc (`.mp3`, `.wav`, `.ogg`, `.m4a`) vào đây, restart server l�
 nó hiện trong danh sách "배경 음악" ở cửa sổ cài đặt.
 
 - Không có file cũng chạy bình thường — mặc định có "🪷 범종 명상음 (tự sinh)".
+- **범종명상_10분.mp3** (có sẵn): nhạc thiền 10 phút do Muse tổng hợp
+  2026-11-02 — tiếng chuông 범종 Hàn Quốc gõ mỗi ~55 giây, điểm tiếng
+  mõ 목탁 thưa, nền drone trầm; fade hai đầu, bật loop để chạy nền live.
