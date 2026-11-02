@@ -103,6 +103,8 @@ class BokunSuhoApp {
     this.sanctuaryEl = document.getElementById('devotees-sanctuary');
     const buddhaImg = document.getElementById('buddha-statue');
     if (buddhaImg && typeof BOKUN_IMAGES !== 'undefined') buddhaImg.src = BOKUN_IMAGES.buddha;
+    const bgImg = document.getElementById('temple-bg');
+    if (bgImg && typeof BOKUN_IMAGES !== 'undefined' && BOKUN_IMAGES.bg) bgImg.src = BOKUN_IMAGES.bg;
     this.statusActionEl = document.getElementById('status-action-text');
     this.statusDotEl = document.getElementById('status-indicator-dot');
     this.statusBadgeEl = document.getElementById('status-right-badge');
@@ -159,7 +161,7 @@ class BokunSuhoApp {
     for (let r = 0; r < rows; r++) {
       const rowProgress = r / (rows - 1);
       const scale = 0.48 + Math.pow(rowProgress, 1.2) * 0.54;
-      const y = 64 + rowProgress * 29;
+      const y = 70 + rowProgress * 25;
 
       for (let c = 0; c < colsPerSide; c++) {
         const colProgress = c / (colsPerSide - 1);
@@ -497,9 +499,9 @@ class BokunSuhoApp {
 
     window.templeAudio?.playIncenseChime();
 
-    // Step 2: Smoothly walk up the red carpet towards the incense burner at top: 58%
+    // Step 2: Smoothly walk up the red carpet towards the incense burner at top: 77%
     setTimeout(() => {
-      this.walkingActor.style.top = '58%';
+      this.walkingActor.style.top = '77%';
       this.walkingActor.style.transform = 'translate(-50%, -100%) scale(0.68)';
     }, 50);
 

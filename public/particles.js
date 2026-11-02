@@ -87,9 +87,9 @@ class ParticleSystem {
   createSmoke() {
     const w = this.cssWidth || 540;
     const h = this.cssHeight || 960;
-    // Incense burner center in 9:16 vertical temple background is at x = 50.5%, y = 57%
-    const originX = w * 0.505;
-    const originY = h * 0.57;
+    // Incense burner center in 9:16 vertical temple background is at x = 50%, y = 75.5%
+    const originX = w * 0.50;
+    const originY = h * 0.755;
 
     return {
       x: originX + (Math.random() - 0.5) * 16,
@@ -108,8 +108,8 @@ class ParticleSystem {
   createSparkle(isBurst = false) {
     const w = this.cssWidth || 540;
     const h = this.cssHeight || 960;
-    const originX = w * 0.505;
-    const originY = isBurst ? h * 0.56 : h * 0.45;
+    const originX = w * 0.50;
+    const originY = isBurst ? h * 0.74 : h * 0.45;
 
     const angle = Math.random() * Math.PI * 2;
     const speed = isBurst ? 1.5 + Math.random() * 3.5 : 0.4 + Math.random() * 1.2;

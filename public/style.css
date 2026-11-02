@@ -106,8 +106,8 @@ html, body {
 .buddha-halo-glow {
   position: absolute;
   left: 50%;
-  top: 13%;
-  width: 46%;
+  top: 50%;
+  width: 40%;
   aspect-ratio: 1;
   transform: translateX(-50%);
   background: radial-gradient(circle, rgba(255, 233, 168, 0.35) 0%, rgba(245, 201, 92, 0.12) 55%, transparent 70%);
@@ -125,12 +125,12 @@ html, body {
   filter: drop-shadow(0 3px 6px rgba(0,0,0,0.45));
 }
 
-/* Korean Buddha statue photo (over the hall, under the incense beam) */
+/* Korean Buddha statue photo (enshrined in the temple doorway) */
 .buddha-statue {
   position: absolute;
   left: 50%;
-  top: 10.5%;
-  height: 31%;
+  top: 52%;
+  height: 26%;
   transform: translateX(-50%);
   z-index: 1;
   pointer-events: none;
@@ -142,10 +142,10 @@ html, body {
 }
 .incense-beam {
   position: absolute;
-  left: 50.5%;
-  top: 30%;
+  left: 50%;
+  top: 47%;
   width: 7%;
-  height: 28%;
+  height: 29%;
   transform: translateX(-50%);
   background: linear-gradient(180deg, rgba(255, 233, 168, 0.22), transparent);
   filter: blur(6px);
