@@ -162,37 +162,91 @@
     <!-- upper bracket band -->
     <rect x="96" y="132" width="348" height="22" fill="url(#dancheong)" opacity="0.9" stroke="#3d1c1a" stroke-width="1.5"/>
 
-    <!-- ===== BUDDHA ===== -->
+    <!-- ===== BUDDHA (Korean statue style: 나발·육계·반개합장·삼도·연화대좌) ===== -->
     <g>
-      <circle cx="270" cy="255" r="105" fill="url(#buddhaHalo)"/>
-      <circle cx="270" cy="255" r="72" fill="none" stroke="#f5c95c" stroke-width="3" opacity="0.8"/>
-      <circle cx="270" cy="255" r="60" fill="none" stroke="#f5c95c" stroke-width="1.4" opacity="0.5"/>
-      <!-- body -->
+      <!-- mandorla (광배) -->
+      <circle cx="270" cy="258" r="108" fill="url(#buddhaHalo)"/>
+      <circle cx="270" cy="258" r="82" fill="none" stroke="#f5c95c" stroke-width="9" stroke-dasharray="5 27.1" opacity="0.5"/>
+      <circle cx="270" cy="258" r="76" fill="none" stroke="#f5c95c" stroke-width="2.5" opacity="0.8"/>
+      <circle cx="270" cy="258" r="64" fill="none" stroke="#f5c95c" stroke-width="1.2" opacity="0.5"/>
+
+      <!-- lotus pedestal, lower petals (연화대좌) -->
+      <g fill="#9a6f1e" stroke="#6e4e10" stroke-width="1">
+        <ellipse cx="270" cy="348" rx="11" ry="24"/>
+        <ellipse cx="270" cy="348" rx="11" ry="24" transform="rotate(28 270 324)"/>
+        <ellipse cx="270" cy="348" rx="11" ry="24" transform="rotate(-28 270 324)"/>
+        <ellipse cx="270" cy="348" rx="11" ry="24" transform="rotate(56 270 324)"/>
+        <ellipse cx="270" cy="348" rx="11" ry="24" transform="rotate(-56 270 324)"/>
+        <ellipse cx="270" cy="348" rx="11" ry="24" transform="rotate(80 270 324)"/>
+        <ellipse cx="270" cy="348" rx="11" ry="24" transform="rotate(-80 270 324)"/>
+      </g>
+
+      <!-- body: broad shoulders, robe-draped torso -->
       <g>
-        <ellipse cx="270" cy="312" rx="52" ry="20" fill="#8a5f16"/>
-        <path d="M222,312 C226,282 244,268 270,268 C296,268 314,282 318,312 Z" fill="url(#buddhaRobe)"/>
-        <path d="M246,268 C250,282 246,296 240,308" stroke="#8a5f16" stroke-width="2.5" fill="none" opacity="0.7"/>
-        <path d="M294,268 C290,282 294,296 300,308" stroke="#8a5f16" stroke-width="2.5" fill="none" opacity="0.7"/>
-        <!-- shoulders / arms hint -->
-        <path d="M232,292 C240,286 252,284 262,288" stroke="#8a5f16" stroke-width="2" fill="none" opacity="0.6"/>
-        <path d="M308,292 C300,286 288,284 278,288" stroke="#8a5f16" stroke-width="2" fill="none" opacity="0.6"/>
-        <!-- meditation hands -->
-        <ellipse cx="270" cy="300" rx="20" ry="9" fill="url(#buddhaGold)"/>
-        <ellipse cx="270" cy="298" rx="12" ry="5.5" fill="#ffe9a8" opacity="0.85"/>
-        <!-- neck & head -->
-        <rect x="260" y="238" width="20" height="18" rx="6" fill="url(#buddhaGold)"/>
-        <circle cx="270" cy="222" r="21" fill="url(#buddhaGold)"/>
-        <!-- ushnisha -->
-        <circle cx="270" cy="200" r="8" fill="url(#buddhaGold)"/>
-        <!-- ears -->
-        <ellipse cx="249" cy="224" rx="4.5" ry="9" fill="url(#buddhaGold)"/>
-        <ellipse cx="291" cy="224" rx="4.5" ry="9" fill="url(#buddhaGold)"/>
-        <!-- serene face hints -->
-        <path d="M260,220 Q264,222 268,220" stroke="#8a5f16" stroke-width="1.6" fill="none" opacity="0.8"/>
-        <path d="M272,220 Q276,222 280,220" stroke="#8a5f16" stroke-width="1.6" fill="none" opacity="0.8"/>
-        <path d="M264,232 Q270,235 276,232" stroke="#8a5f16" stroke-width="1.6" fill="none" opacity="0.7"/>
-        <!-- urna dot -->
-        <circle cx="270" cy="213" r="2.2" fill="#fff3c4"/>
+        <path d="M212,320 C216,292 238,274 270,274 C302,274 324,292 328,320 Z" fill="url(#buddhaRobe)" stroke="#7a5414" stroke-width="1.5"/>
+        <!-- robe drape edge (shoulder to waist) -->
+        <path d="M244,276 C262,290 282,302 302,312" stroke="#7a5414" stroke-width="2.5" fill="none" opacity="0.8"/>
+        <!-- robe folds -->
+        <path d="M250,292 Q262,298 276,296" stroke="#7a5414" stroke-width="1.8" fill="none" opacity="0.55"/>
+        <path d="M246,304 Q262,310 280,308" stroke="#7a5414" stroke-width="1.8" fill="none" opacity="0.55"/>
+        <path d="M232,284 Q240,292 238,302" stroke="#7a5414" stroke-width="1.8" fill="none" opacity="0.55"/>
+        <path d="M308,284 Q300,292 302,302" stroke="#7a5414" stroke-width="1.8" fill="none" opacity="0.55"/>
+        <!-- knees hint -->
+        <path d="M228,318 Q246,310 264,314" stroke="#7a5414" stroke-width="1.6" fill="none" opacity="0.5"/>
+        <path d="M312,318 Q294,310 276,314" stroke="#7a5414" stroke-width="1.6" fill="none" opacity="0.5"/>
+        <!-- dhyana mudra hands (선정인) -->
+        <ellipse cx="270" cy="310" rx="23" ry="10" fill="url(#buddhaGold)" stroke="#7a5414" stroke-width="1.2"/>
+        <ellipse cx="270" cy="307" rx="14" ry="6" fill="#ffe9a8" opacity="0.7"/>
+        <path d="M258,309 Q266,312 274,309" stroke="#7a5414" stroke-width="1.2" fill="none" opacity="0.7"/>
+        <path d="M262,312 Q270,314 278,312" stroke="#7a5414" stroke-width="1.2" fill="none" opacity="0.6"/>
+        <path d="M266,304 Q270,302 274,304" stroke="#7a5414" stroke-width="1.4" fill="none" opacity="0.8"/>
+
+        <!-- neck with three folds (삼도) -->
+        <rect x="261" y="242" width="18" height="16" rx="5" fill="url(#buddhaGold)"/>
+        <path d="M260,247 Q270,249.5 280,247" stroke="#8a5f16" stroke-width="1.4" fill="none" opacity="0.55"/>
+        <path d="M260,251.5 Q270,254 280,251.5" stroke="#8a5f16" stroke-width="1.4" fill="none" opacity="0.55"/>
+        <path d="M260,256 Q270,258.5 280,256" stroke="#8a5f16" stroke-width="1.4" fill="none" opacity="0.55"/>
+
+        <!-- face: full compassionate oval -->
+        <path d="M248,220 C248,202 258,192 270,192 C282,192 292,202 292,220 C292,234 282,244 270,244 C258,244 248,234 248,220 Z" fill="url(#buddhaGold)" stroke="#8a5f16" stroke-width="1"/>
+        <!-- snail-shell curls (나발) -->
+        <g fill="#6e4e10" opacity="0.9">
+          <circle cx="258" cy="197" r="3.1"/><circle cx="266" cy="195" r="3.1"/><circle cx="274" cy="195" r="3.1"/><circle cx="282" cy="197" r="3.1"/>
+          <circle cx="253" cy="204" r="3.1"/><circle cx="261" cy="203" r="3.1"/><circle cx="270" cy="202" r="3.1"/><circle cx="279" cy="203" r="3.1"/><circle cx="287" cy="204" r="3.1"/>
+          <circle cx="257" cy="210" r="3.1"/><circle cx="266" cy="209" r="3.1"/><circle cx="274" cy="209" r="3.1"/><circle cx="283" cy="210" r="3.1"/>
+        </g>
+        <!-- ushnisha (육계) -->
+        <circle cx="270" cy="188" r="8.5" fill="url(#buddhaGold)" stroke="#8a5f16" stroke-width="1"/>
+        <circle cx="267" cy="186" r="2.2" fill="#6e4e10" opacity="0.9"/><circle cx="273" cy="187" r="2.2" fill="#6e4e10" opacity="0.9"/>
+        <!-- urna (백호) -->
+        <circle cx="270" cy="212" r="2.6" fill="#fff8e0" stroke="#d4af37" stroke-width="0.8"/>
+        <!-- eyebrows: gentle arcs -->
+        <path d="M255,217 Q261,214 267,216" stroke="#5d430c" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M273,216 Q279,214 285,217" stroke="#5d430c" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- eyes: half-closed in meditation (반개합장) -->
+        <path d="M256,223 Q262,225.5 268,223" stroke="#5d430c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M272,223 Q278,225.5 284,223" stroke="#5d430c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <!-- nose: subtle -->
+        <path d="M270,224 C269,228 268,231 267,233" stroke="#8a5f16" stroke-width="1.4" fill="none" opacity="0.7" stroke-linecap="round"/>
+        <!-- mouth: gentle compassionate smile -->
+        <path d="M262,237 Q270,241.5 278,237" stroke="#7a5414" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- long earlobes -->
+        <path d="M248,219 C243,226 242,235 245,243 C247,247 251,246 252,242 L250,221 Z" fill="url(#buddhaGold)" stroke="#8a5f16" stroke-width="1"/>
+        <path d="M292,219 C297,226 298,235 295,243 C293,247 289,246 288,242 L290,221 Z" fill="url(#buddhaGold)" stroke="#8a5f16" stroke-width="1"/>
+        <!-- soft cheek light -->
+        <ellipse cx="258" cy="231" rx="5" ry="3" fill="#ffdf9e" opacity="0.3"/>
+        <ellipse cx="282" cy="231" rx="5" ry="3" fill="#ffdf9e" opacity="0.3"/>
+      </g>
+
+      <!-- lotus pedestal, upper petals -->
+      <g fill="url(#buddhaRobe)" stroke="#7a5414" stroke-width="1">
+        <ellipse cx="270" cy="300" rx="11" ry="24"/>
+        <ellipse cx="270" cy="300" rx="11" ry="24" transform="rotate(28 270 324)"/>
+        <ellipse cx="270" cy="300" rx="11" ry="24" transform="rotate(-28 270 324)"/>
+        <ellipse cx="270" cy="300" rx="11" ry="24" transform="rotate(56 270 324)"/>
+        <ellipse cx="270" cy="300" rx="11" ry="24" transform="rotate(-56 270 324)"/>
+        <ellipse cx="270" cy="300" rx="11" ry="24" transform="rotate(80 270 324)"/>
+        <ellipse cx="270" cy="300" rx="11" ry="24" transform="rotate(-80 270 324)"/>
       </g>
     </g>
 
