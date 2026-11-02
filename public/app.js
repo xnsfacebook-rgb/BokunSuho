@@ -47,72 +47,16 @@ const HANBOK_PALETTE = [
 const SKIN = '#f0c297';
 const HAIR = '#1e1a16';
 
-function devoteeSeatedSVG(c) {
-  return `<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="114" rx="30" ry="6" fill="#000" opacity="0.35"/>
-    <path d="M22,112 C28,78 38,66 50,66 C62,66 72,78 78,112 Z" fill="${c.bottom}"/>
-    <path d="M38,110 C40,92 44,80 50,76" stroke="#00000022" stroke-width="2.5" fill="none"/>
-    <path d="M62,110 C60,92 56,80 50,76" stroke="#00000022" stroke-width="2.5" fill="none"/>
-    <ellipse cx="31" cy="62" rx="7.5" ry="13" fill="${c.top}" opacity="0.92"/>
-    <ellipse cx="69" cy="62" rx="7.5" ry="13" fill="${c.top}" opacity="0.92"/>
-    <path d="M36,70 C36,52 42,42 50,42 C58,42 64,52 64,70 L60,77 C54,73 46,73 40,77 Z" fill="${c.top}"/>
-    <path d="M46,58 q4,5 8,0" stroke="#00000033" stroke-width="2" fill="none"/>
-    <rect x="46" y="33" width="8" height="11" rx="3" fill="${SKIN}"/>
-    <circle cx="50" cy="25" r="13" fill="${SKIN}"/>
-    <path d="M37,23 C37,13 43,7 50,7 C57,7 63,13 63,23 C63,29 60,33 56,35 L44,35 C40,33 37,29 37,23 Z" fill="${HAIR}"/>
-    <circle cx="50" cy="9" r="6.5" fill="${HAIR}"/>
-    <rect x="45.5" y="1.5" width="9" height="2.6" rx="1.3" fill="#d4af37" transform="rotate(24 50 5)"/>
-    <circle cx="55" cy="6" r="1.6" fill="#f5d67a"/>
-  </svg>`;
+function devoteeSeatedImg() {
+  return `<img class="devotee-photo" src="${BOKUN_IMAGES.devotee_seated}" alt="신도">`;
 }
 
-function devoteeWalkingSVG(c) {
-  return `<svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="144" rx="30" ry="6" fill="#000" opacity="0.35"/>
-    <g opacity="0.55" stroke="#cfd4dc" stroke-width="2.5" fill="none" stroke-linecap="round">
-      <path d="M41,26 C38,20 43,16 41,10"/>
-      <path d="M51,22 C49,16 54,12 52,6"/>
-      <path d="M61,26 C59,20 64,16 62,10"/>
-    </g>
-    <g stroke="#6b4a2a" stroke-width="2.6" stroke-linecap="round">
-      <line x1="42" y1="108" x2="38" y2="30"/>
-      <line x1="50" y1="108" x2="50" y2="26"/>
-      <line x1="58" y1="108" x2="62" y2="30"/>
-    </g>
-    <g>
-      <circle cx="38" cy="30" r="6" fill="#ff9a3c" opacity="0.35"/>
-      <circle cx="38" cy="30" r="3.4" fill="#ffcf7a"/>
-      <circle cx="50" cy="26" r="6" fill="#ff9a3c" opacity="0.35"/>
-      <circle cx="50" cy="26" r="3.4" fill="#ffcf7a"/>
-      <circle cx="62" cy="30" r="6" fill="#ff9a3c" opacity="0.35"/>
-      <circle cx="62" cy="30" r="3.4" fill="#ffcf7a"/>
-    </g>
-    <path d="M22,142 C28,108 38,96 50,96 C62,96 72,108 78,142 Z" fill="${c.bottom}"/>
-    <path d="M38,140 C40,122 44,110 50,106" stroke="#00000022" stroke-width="2.5" fill="none"/>
-    <path d="M62,140 C60,122 56,110 50,106" stroke="#00000022" stroke-width="2.5" fill="none"/>
-    <ellipse cx="31" cy="92" rx="7.5" ry="13" fill="${c.top}" opacity="0.92"/>
-    <ellipse cx="69" cy="92" rx="7.5" ry="13" fill="${c.top}" opacity="0.92"/>
-    <path d="M36,100 C36,82 42,72 50,72 C58,72 64,82 64,100 L60,107 C54,103 46,103 40,107 Z" fill="${c.top}"/>
-    <rect x="46" y="63" width="8" height="11" rx="3" fill="${SKIN}"/>
-    <circle cx="50" cy="55" r="13" fill="${SKIN}"/>
-    <path d="M37,53 C37,43 43,37 50,37 C57,37 63,43 63,53 C63,59 60,63 56,65 L44,65 C40,63 37,59 37,53 Z" fill="${HAIR}"/>
-    <circle cx="50" cy="39" r="6.5" fill="${HAIR}"/>
-    <rect x="45.5" y="31.5" width="9" height="2.6" rx="1.3" fill="#d4af37" transform="rotate(24 50 35)"/>
-  </svg>`;
+function devoteeWalkingImg() {
+  return `<img class="devotee-photo" src="${BOKUN_IMAGES.devotee_walking}" alt="향 공양">`;
 }
 
-function devoteeBowingSVG(c) {
-  return `<svg viewBox="0 0 140 70" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="70" cy="63" rx="56" ry="6" fill="#000" opacity="0.35"/>
-    <rect x="6" y="50" width="28" height="9" rx="4.5" fill="${c.top}"/>
-    <circle cx="9" cy="54.5" r="5" fill="${SKIN}"/>
-    <path d="M40,60 C40,32 58,22 88,24 C114,26 130,38 132,58 Z" fill="${c.bottom}"/>
-    <ellipse cx="78" cy="34" rx="27" ry="14" fill="${c.top}"/>
-    <circle cx="38" cy="46" r="12" fill="${SKIN}"/>
-    <path d="M26,44 C26,34 32,28 39,28 C46,28 50,34 50,42 L44,48 L32,48 Z" fill="${HAIR}"/>
-    <circle cx="38" cy="30" r="6" fill="${HAIR}"/>
-    <rect x="34" y="23" width="8" height="2.4" rx="1.2" fill="#d4af37" transform="rotate(20 38 26)"/>
-  </svg>`;
+function devoteeBowingImg() {
+  return `<img class="devotee-photo" src="${BOKUN_IMAGES.devotee_bowing}" alt="절">`;
 }
 
 class BokunSuhoApp {
@@ -157,6 +101,8 @@ class BokunSuhoApp {
 
   initDOM() {
     this.sanctuaryEl = document.getElementById('devotees-sanctuary');
+    const buddhaImg = document.getElementById('buddha-statue');
+    if (buddhaImg && typeof BOKUN_IMAGES !== 'undefined') buddhaImg.src = BOKUN_IMAGES.buddha;
     this.statusActionEl = document.getElementById('status-action-text');
     this.statusDotEl = document.getElementById('status-indicator-dot');
     this.statusBadgeEl = document.getElementById('status-right-badge');
@@ -245,7 +191,7 @@ class BokunSuhoApp {
 
       el.innerHTML = `
         <div class="devotee-sprite-wrap">
-          ${devoteeSeatedSVG(seat.colors)}
+          ${devoteeSeatedImg()}
         </div>
         <div class="devotee-name-badge">
           <div class="devotee-badge-avatar">신</div>
@@ -546,7 +492,7 @@ class BokunSuhoApp {
     this.walkingActor.style.opacity = '1';
     this.walkingActor.style.top = '93%';
     this.walkingActor.style.transform = 'translate(-50%, -100%) scale(1.02)';
-    this.walkingSprite.innerHTML = devoteeWalkingSVG(colors);
+    this.walkingSprite.innerHTML = devoteeWalkingImg();
     this.walkingActor.classList.add('is-walking');
 
     window.templeAudio?.playIncenseChime();
@@ -560,11 +506,10 @@ class BokunSuhoApp {
     // Step 3: Arrive at Altar (after ~3.2s) -> Kneel down & Prostrate
     setTimeout(() => {
       this.walkingActor.classList.remove('is-walking');
-      this.walkingSprite.innerHTML = devoteeSeatedSVG(colors);
+      this.walkingSprite.innerHTML = devoteeSeatedImg();
 
       setTimeout(() => {
-        this.walkingSprite.innerHTML = devoteeBowingSVG(colors);
-        this.walkingActor.classList.add('bowing');
+        this.walkingSprite.innerHTML = devoteeBowingImg();
 
         // Incense urn bursts with sacred smoke & golden sparks!
         this.particles?.boostIncense(6000);
@@ -578,8 +523,7 @@ class BokunSuhoApp {
 
         // Step 4: Rise back up to prayer pose after bowing
         setTimeout(() => {
-          this.walkingSprite.innerHTML = devoteeSeatedSVG(colors);
-          this.walkingActor.classList.remove('bowing');
+          this.walkingSprite.innerHTML = devoteeSeatedImg();
 
           setTimeout(() => {
             this.walkingActor.style.transition = 'opacity 1.2s, top 3.4s';
