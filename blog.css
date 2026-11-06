@@ -495,3 +495,22 @@ img { max-width: 100%; }
   .tool-form { padding: 16px; }
   .interpretation { padding: 18px; }
 }
+
+/* ---------- 연도별 운세 (1950–1980년생 2027년) ---------- */
+.year-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.year-tile { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px; text-align: center; font-size: .85rem; line-height: 1.5; }
+.year-tile:hover { border-color: var(--red); text-decoration: none; background: var(--red-soft); }
+.year-tile .z-emoji { display: block; font-size: 1.5rem; line-height: 1.2; }
+.year-tile b { display: block; font-size: .95rem; }
+.section-desc { color: var(--ink-soft); font-size: .92rem; margin: 0 0 16px; }
+.data-table { width: 100%; border-collapse: collapse; margin: 14px 0 24px; font-size: .92rem; }
+.data-table th, .data-table td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+.data-table th { background: var(--red-soft); font-weight: 700; white-space: nowrap; }
+.data-table tr:nth-child(even) td { background: #fffdf8; }
+.year-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.year-nav a { font-weight: 700; }
+@media (max-width: 860px) {
+  .year-grid { grid-template-columns: repeat(3, 1fr); }
+  .data-table { font-size: .85rem; }
+  .data-table th { white-space: normal; }
+}
