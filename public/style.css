@@ -738,41 +738,30 @@ html, body {
   background: rgba(212, 175, 55, 0.4); border-radius: 3px;
 }
 
-
-/* =====================================================================
-   3D 무대 모드 (scene3d/stage.js)
-   ===================================================================== */
-.temple3d-canvas { position: absolute; inset: 0; z-index: 0; display: block; }
-.mode-3d .temple-bg,
-.mode-3d .buddha-halo-glow,
-.mode-3d .buddha-statue,
-.mode-3d .incense-beam,
-.mode-3d #particle-canvas { display: none !important; }
-.mode-badge { background: linear-gradient(135deg, #d4af37, #a8741a); color: #2a1a06; }
-
-/* 3D 신도 이름표 — 머리 위에 떠 있는 작은 명찰 */
-.devotee-seat.seat-3d {
-  left: 0; top: 0;
-  transform-origin: 50% 100%;
-  will-change: transform;
-  pointer-events: none;
+/* ---------- Google 로그인 (타이틀바 + 환영 모달) ---------- */
+.window-title { min-width: 0; overflow: hidden; }
+.window-title span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; }
+.window-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.auth-area { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.auth-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(212, 175, 55, .6); flex-shrink: 0; }
+.auth-avatar-fallback { display: flex; align-items: center; justify-content: center; background: var(--gold); color: #2a1f08; font-weight: 700; font-size: .8rem; }
+.auth-name { max-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--paper); font-size: 11px; }
+.auth-logout { padding: 4px 7px; font-size: 10px; }
+.auth-modal-card { text-align: center; padding: 26px 22px 22px; max-width: 360px; }
+.auth-modal-seal {
+  width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 12px;
+  background: var(--dancheong-red); color: var(--paper);
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;
 }
-.devotee-seat.seat-3d .devotee-name-badge {
-  margin-top: 0;
-  background: rgba(10, 6, 4, 0.62);
-  border-color: rgba(212, 175, 55, 0.55);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
-}
-.devotee-seat.seat-3d .devotee-badge-name { font-size: 10px; }
-.devotee-seat.seat-3d .speech-bubble { bottom: calc(100% + 6px); }
+.auth-modal-card h2 { font-family: 'Noto Serif KR', serif; font-size: 1.25rem; margin-bottom: 10px; color: var(--paper); }
+.auth-modal-card p { font-size: .85rem; color: #cfc4ae; line-height: 1.7; margin-bottom: 18px; }
+#auth-gsi-btn { display: flex; justify-content: center; margin-bottom: 8px; }
+#auth-gsi-btn:empty { margin-bottom: 0; }
+.auth-setup-note { font-size: .78rem; color: var(--gold-light); margin-bottom: 10px; }
+.auth-skip { background: none; border: none; color: #cfc4ae; font-size: .85rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
 
-/* 3D 행렬 신도 — 이름표만 (몸은 3D 모델) */
-.mode-3d .walking-devotee-container {
-  left: 0 !important; top: 0 !important;
-  transition: opacity 0.6s !important;
-  transform-origin: 50% 100%;
-  will-change: transform;
+/* 좁은 화면: 제목 텍스트·최소화 버튼 숨겨 로그인/상품 버튼 자리 확보 */
+@media (max-width: 480px) {
+  .window-title span:nth-child(2) { display: none; }
+  .win-btn[title="최소화"] { display: none; }
 }
-.mode-3d .walking-sprite { display: none; }
-.mode-3d .walking-nametag { margin-top: 0; box-shadow: 0 0 14px rgba(212, 175, 55, 0.45); }
