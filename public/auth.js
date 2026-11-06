@@ -7,6 +7,7 @@
    ----------------------------------------------------------------
    동작: 로그인하면 이름·이메일·프로필 사진만 localStorage에 저장
    (서버 없음 — 토큰 검증 없음, 가벼운 식별용). 로그아웃하면 삭제.
+   로그인하면 app.js가 본인 이름+사진으로 전면 좌석에 가상 캐릭터를 앉힌다.
    환영 모달은 공개 사이트에서만 뜹니다 — localhost/OBS·Electron
    스테이지에서는 뜨지 않아 방송 화면을 가리지 않습니다. */
 (function () {
@@ -14,8 +15,6 @@
 
   var GOOGLE_CLIENT_ID = '565064645551-ht8gdl9m0fl5jnft244vcc2p8d9q0eqk.apps.googleusercontent.com'; // 복운수호 전용 Client ID
   var LS_USER = 'sajubit_user';
-  var LS_AVATAR = 'sajubit_avatar';
-  var LS_AVATAR_BACKUP = 'sajubit_avatar_backup';
   var SS_WELCOME = 'sajubit_welcome_seen';
 
   function loadUser() {
@@ -43,34 +42,13 @@
     if (!p) return;
     var user = { name: p.name || '', email: p.email || '', picture: p.picture || '' };
     saveUser(user);
-    applyUserToTemple(user);
     paintAuthArea();
     closeWelcome();
-    /* 3D 사찰에 가상 캐릭터(동자승)가 Google 이름으로 바로 나타나도록 새로고침 */
+    /* 새로고침하면 app.js가 본인 이름+사진으로 전면 좌석에 캐릭터를 앉힌다 */
     location.reload();
   }
 
-  /* 로그인하면 3D 사찰 방문객 캐릭터 이름을 Google 이름으로 바꾸기 (원래 법명은 백업) */
-  function applyUserToTemple(user) {
-    try {
-      var raw = localStorage.getItem(LS_AVATAR);
-      if (raw && !localStorage.getItem(LS_AVATAR_BACKUP)) localStorage.setItem(LS_AVATAR_BACKUP, raw);
-      var a = raw ? JSON.parse(raw) : {};
-      a.name = user.name;
-      a.isNew = false;
-      localStorage.setItem(LS_AVATAR, JSON.stringify(a));
-      var mn = document.getElementById('w3d-mename');
-      if (mn) mn.textContent = '나 ' + user.name;
-    } catch (e) {}
-  }
-  function restoreAvatar() {
-    try {
-      var b = localStorage.getItem(LS_AVATAR_BACKUP);
-      if (b) { localStorage.setItem(LS_AVATAR, b); localStorage.removeItem(LS_AVATAR_BACKUP); }
-    } catch (e) {}
-  }
-
-  function logout() { clearUser(); restoreAvatar(); location.reload(); }
+  function logout() { clearUser(); location.reload(); }
   window.bokunLogout = logout;
 
   /* ---------- 상단 로그인 영역 (스테이지 타이틀바 / 상점 헤더) ---------- */
