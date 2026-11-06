@@ -1,0 +1,253 @@
+/* 복운수호 블로그 — 한국 사주·운세 블로그 (밝은 테마) */
+:root {
+  --paper: #faf7f1;
+  --card: #ffffff;
+  --ink: #2b2620;
+  --ink-soft: #6b6259;
+  --line: #e8dfd3;
+  --red: #b03a2e;
+  --red-soft: #fbeeea;
+  --gold: #a67c2e;
+  --gold-soft: #f7efdc;
+  --green: #3d6b4f;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+a { color: var(--red); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; }
+
+/* ---------- 헤더 ---------- */
+.blog-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+}
+.blog-header-inner {
+  max-width: 1080px; margin: 0 auto; padding: 10px 16px 0;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 9px; color: var(--ink); flex-shrink: 0; }
+.brand:hover { text-decoration: none; }
+.brand-seal {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--red); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif KR', serif; font-size: 1.2rem; font-weight: 700;
+}
+.brand-name { font-family: 'Noto Serif KR', serif; font-size: 1.3rem; font-weight: 700; letter-spacing: .02em; }
+.brand-sub { font-size: .68rem; color: var(--ink-soft); letter-spacing: .12em; }
+.blog-nav {
+  display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none;
+  flex: 1 1 auto; min-width: 0; padding-bottom: 10px;
+}
+.blog-nav::-webkit-scrollbar { display: none; }
+.blog-nav a {
+  color: var(--ink); font-size: .9rem; font-weight: 500;
+  padding: 6px 10px; border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+}
+.blog-nav a:hover { background: var(--red-soft); color: var(--red); text-decoration: none; }
+.blog-nav a.active { background: var(--red); color: #fff; }
+.blog-nav a.shop-link { color: var(--red); font-weight: 700; }
+
+/* 로그인 영역 (auth.js가 채움) */
+.auth-area { display: flex; align-items: center; gap: 7px; flex-shrink: 0; margin-left: auto; padding-bottom: 10px; }
+.auth-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
+.auth-avatar-fallback {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--gold); color: #fff; font-weight: 700; font-size: .8rem;
+}
+.auth-name { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .82rem; }
+.auth-login-btn, .auth-logout-btn {
+  border: 1px solid var(--red); background: #fff; color: var(--red);
+  border-radius: 999px; padding: 5px 12px; font-size: .82rem; cursor: pointer; font-family: inherit;
+}
+.auth-login-btn { background: var(--red); color: #fff; }
+.auth-logout-btn { border-color: var(--line); color: var(--ink-soft); }
+
+/* ---------- 히어로 ---------- */
+.hero {
+  background: linear-gradient(180deg, #f7efdc 0%, #faf7f1 100%);
+  border-bottom: 1px solid var(--line);
+}
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 34px 16px 30px; text-align: center; }
+.hero-date { font-size: .82rem; color: var(--gold); letter-spacing: .14em; font-weight: 700; }
+.hero h1 {
+  font-family: 'Noto Serif KR', serif; font-size: clamp(1.7rem, 5.5vw, 2.6rem);
+  line-height: 1.35; margin: 10px 0 8px;
+}
+.hero p { color: var(--ink-soft); margin: 0 auto 20px; max-width: 560px; font-size: .95rem; }
+
+/* 띠 선택 위젯 */
+.zodiac-picker { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 640px; margin: 0 auto; }
+.zodiac-btn {
+  border: 1px solid var(--line); background: #fff; border-radius: 12px;
+  padding: 8px 4px; width: 76px; cursor: pointer; font-family: inherit;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.zodiac-btn:hover { border-color: var(--red); }
+.zodiac-btn.selected { border-color: var(--red); background: var(--red-soft); }
+.zodiac-btn .z-emoji { font-size: 1.35rem; line-height: 1; }
+.zodiac-btn .z-name { font-size: .82rem; font-weight: 600; }
+.zodiac-btn .z-year { font-size: .68rem; color: var(--ink-soft); }
+.fortune-result {
+  max-width: 640px; margin: 18px auto 0; background: #fff;
+  border: 1px solid var(--line); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 16px 18px; text-align: left; display: none;
+}
+.fortune-result.show { display: block; }
+.fortune-result h3 { margin: 0 0 6px; font-family: 'Noto Serif KR', serif; font-size: 1.1rem; }
+.fortune-result p { margin: 0 0 8px; font-size: .92rem; }
+.fortune-meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .82rem; color: var(--ink-soft); }
+.fortune-meta b { color: var(--ink); }
+
+/* ---------- 섹션 ---------- */
+.section { max-width: 1080px; margin: 0 auto; padding: 30px 16px 6px; }
+.section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.section-head h2 { font-family: 'Noto Serif KR', serif; font-size: 1.35rem; margin: 0; }
+.section-head .more { margin-left: auto; font-size: .85rem; }
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.chip {
+  border: 1px solid var(--line); background: #fff; border-radius: 999px;
+  padding: 5px 13px; font-size: .83rem; cursor: pointer; font-family: inherit; color: var(--ink);
+}
+.chip.selected { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* 글 카드 */
+.post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.post-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px; display: flex; flex-direction: column; gap: 8px; color: var(--ink);
+}
+.post-card:hover { text-decoration: none; border-color: var(--red); box-shadow: 0 4px 18px rgba(176,58,46,.08); }
+.post-cat {
+  font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: var(--red);
+  background: var(--red-soft); border-radius: 6px; padding: 3px 8px; align-self: flex-start;
+}
+.post-card h3 { font-family: 'Noto Serif KR', serif; font-size: 1.08rem; line-height: 1.45; margin: 0; }
+.post-card p { margin: 0; font-size: .88rem; color: var(--ink-soft); flex: 1; }
+.post-meta { font-size: .75rem; color: var(--ink-soft); }
+
+/* 띠 바로가기 */
+.zodiac-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.zodiac-tile {
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 4px; text-align: center; color: var(--ink); font-size: .85rem;
+}
+.zodiac-tile:hover { border-color: var(--red); text-decoration: none; background: var(--red-soft); }
+.zodiac-tile .z-emoji { display: block; font-size: 1.5rem; line-height: 1.2; }
+
+/* 도구 카드 */
+.tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.tool-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px; color: var(--ink); display: block;
+}
+.tool-card:hover { text-decoration: none; border-color: var(--gold); box-shadow: 0 4px 18px rgba(166,124,46,.10); }
+.tool-card .t-ico { font-size: 1.6rem; }
+.tool-card h3 { font-family: 'Noto Serif KR', serif; font-size: 1.02rem; margin: 8px 0 4px; }
+.tool-card p { margin: 0; font-size: .85rem; color: var(--ink-soft); }
+
+/* 상점 */
+.shop-teaser {
+  background: linear-gradient(135deg, #2b2620, #4a3423);
+  border-radius: 16px; padding: 24px; color: #f5efe4;
+  display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+}
+.shop-teaser h2 { font-family: 'Noto Serif KR', serif; margin: 0 0 6px; font-size: 1.3rem; }
+.shop-teaser p { margin: 0 0 14px; font-size: .9rem; color: #d8cdb8; }
+.shop-teaser .btn {
+  display: inline-block; background: var(--red); color: #fff; border-radius: 999px;
+  padding: 9px 20px; font-weight: 700; font-size: .9rem;
+}
+.shop-teaser .btn:hover { text-decoration: none; background: #c04538; }
+.shop-products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1 1 420px; }
+.shop-product {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px; padding: 12px; color: #f5efe4; font-size: .83rem;
+}
+.shop-product:hover { text-decoration: none; background: rgba(255,255,255,.14); }
+.shop-product b { display: block; font-size: .88rem; margin-bottom: 4px; line-height: 1.4; }
+.shop-product .price { color: #f0c96a; font-weight: 700; }
+
+/* ---------- 본문 (글 페이지) ---------- */
+.article { max-width: 760px; margin: 0 auto; padding: 30px 16px 40px; }
+.article .post-cat { font-size: .75rem; }
+.article h1 { font-family: 'Noto Serif KR', serif; font-size: clamp(1.5rem, 5vw, 2.1rem); line-height: 1.4; margin: 12px 0 8px; }
+.article .post-meta { font-size: .83rem; color: var(--ink-soft); margin-bottom: 20px; }
+.article h2 { font-family: 'Noto Serif KR', serif; font-size: 1.3rem; margin: 30px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+.article h3 { font-size: 1.05rem; margin: 22px 0 8px; }
+.article p { margin: 0 0 14px; }
+.article ul, .article ol { margin: 0 0 14px; padding-left: 22px; }
+.article li { margin-bottom: 6px; }
+.article blockquote {
+  margin: 18px 0; padding: 14px 18px; background: var(--gold-soft);
+  border-left: 4px solid var(--gold); border-radius: 0 10px 10px 0; font-size: .95rem;
+}
+.article table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: .9rem; }
+.article th, .article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+.article th { background: var(--gold-soft); }
+.zodiac-block { scroll-margin-top: 90px; }
+.zodiac-block h3 { display: flex; align-items: center; gap: 8px; }
+.zodiac-block h3 .z-emoji { font-size: 1.4rem; }
+.related { margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--line); }
+.related h2 { border: none; padding: 0; margin: 0 0 12px; }
+.related ul { list-style: none; padding: 0; margin: 0; }
+.related li { margin-bottom: 8px; }
+
+/* ---------- 푸터 ---------- */
+.blog-footer { background: #2b2620; color: #cfc4b4; margin-top: 40px; }
+.blog-footer-inner { max-width: 1080px; margin: 0 auto; padding: 30px 16px; }
+.blog-footer h3 { color: #f5efe4; font-family: 'Noto Serif KR', serif; margin: 0 0 8px; }
+.blog-footer p { font-size: .85rem; margin: 0 0 10px; }
+.blog-footer a { color: #f0c96a; }
+.footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 14px 0; font-size: .88rem; }
+.footer-note { font-size: .75rem; color: #9a8f7d; }
+
+/* ---------- 로그인 모달 (auth.js, 밝은 테마) ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(43,38,32,.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.modal-card {
+  background: #fff; border-radius: 16px; max-width: 360px; width: calc(100% - 40px);
+  padding: 26px 22px 20px; text-align: center; box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+.auth-modal-seal {
+  width: 52px; height: 52px; margin: 0 auto 10px; border-radius: 12px;
+  background: var(--red); color: #fff; font-family: 'Noto Serif KR', serif;
+  font-size: 1.6rem; font-weight: 700; display: flex; align-items: center; justify-content: center;
+}
+.modal-card h2 { font-family: 'Noto Serif KR', serif; font-size: 1.25rem; margin: 0 0 8px; }
+.modal-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.7; margin: 0 0 16px; }
+.auth-setup-note { font-size: .8rem; color: var(--gold); }
+.auth-skip {
+  background: none; border: none; color: var(--ink-soft); font-size: .85rem;
+  cursor: pointer; text-decoration: underline; margin-top: 8px; font-family: inherit;
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 860px) {
+  .post-grid { grid-template-columns: repeat(2, 1fr); }
+  .tool-grid { grid-template-columns: repeat(2, 1fr); }
+  .zodiac-grid { grid-template-columns: repeat(4, 1fr); }
+  .shop-products { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .post-grid { grid-template-columns: 1fr; }
+  .brand-sub { display: none; }
+  .zodiac-btn { width: 68px; }
+  .shop-teaser { padding: 20px 16px; }
+}

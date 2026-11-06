@@ -103,7 +103,7 @@
       '<div class="modal-card auth-modal-card">' +
         '<div class="auth-modal-seal">福</div>' +
         '<h2>복운수호에 오신 것을 환영합니다</h2>' +
-        '<p>Google로 로그인하면 나만의 이름으로<br>온라인 사찰에 참여할 수 있어요.</p>' +
+        '<p>Google로 로그인하면 나만의 이름으로<br>블로그와 상점을 이용할 수 있어요.</p>' +
         '<div id="auth-gsi-btn"></div>' +
         '<p id="auth-setup-note" class="auth-setup-note" hidden>Google 로그인은 곧 준비됩니다.<br>관리자가 연동을 마치는 대로 이용할 수 있어요.</p>' +
         '<button class="auth-skip" type="button" id="auth-skip">나중에 하기</button>' +
