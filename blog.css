@@ -514,3 +514,7 @@ img { max-width: 100%; }
   .data-table { font-size: .85rem; }
   .data-table th { white-space: normal; }
 }
+
+.goods-type { display: block; font-size: .78rem; color: #c9bfa8; margin-bottom: 4px; }
+.goods-buy { display: block; text-align: center; margin-top: 8px; background: var(--red); color: #fff; border-radius: 999px; padding: 7px 14px; font-size: .82rem; font-weight: 700; }
+.goods-buy:hover { text-decoration: none; background: #8f2d23; }
