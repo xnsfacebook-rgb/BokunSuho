@@ -51,7 +51,7 @@ async function createWindow() {
   });
 
   // Load local server URL
-  mainWindow.loadURL(`http://localhost:${SERVER_PORT}`);
+  mainWindow.loadURL(`http://localhost:${SERVER_PORT}/stage.html`); // 2D LIVE 스테이지 (홈페이지는 3D 사찰)
 
   mainWindow.on('closed', () => {
     mainWindow = null;

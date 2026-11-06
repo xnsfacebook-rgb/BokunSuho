@@ -14,6 +14,8 @@
 
   var GOOGLE_CLIENT_ID = '565064645551-ht8gdl9m0fl5jnft244vcc2p8d9q0eqk.apps.googleusercontent.com'; // 복운수호 전용 Client ID
   var LS_USER = 'sajubit_user';
+  var LS_AVATAR = 'sajubit_avatar';
+  var LS_AVATAR_BACKUP = 'sajubit_avatar_backup';
   var SS_WELCOME = 'sajubit_welcome_seen';
 
   function loadUser() {
@@ -41,11 +43,34 @@
     if (!p) return;
     var user = { name: p.name || '', email: p.email || '', picture: p.picture || '' };
     saveUser(user);
+    applyUserToTemple(user);
     paintAuthArea();
     closeWelcome();
+    /* 3D 사찰에 가상 캐릭터(동자승)가 Google 이름으로 바로 나타나도록 새로고침 */
+    location.reload();
   }
 
-  function logout() { clearUser(); location.reload(); }
+  /* 로그인하면 3D 사찰 방문객 캐릭터 이름을 Google 이름으로 바꾸기 (원래 법명은 백업) */
+  function applyUserToTemple(user) {
+    try {
+      var raw = localStorage.getItem(LS_AVATAR);
+      if (raw && !localStorage.getItem(LS_AVATAR_BACKUP)) localStorage.setItem(LS_AVATAR_BACKUP, raw);
+      var a = raw ? JSON.parse(raw) : {};
+      a.name = user.name;
+      a.isNew = false;
+      localStorage.setItem(LS_AVATAR, JSON.stringify(a));
+      var mn = document.getElementById('w3d-mename');
+      if (mn) mn.textContent = '나 ' + user.name;
+    } catch (e) {}
+  }
+  function restoreAvatar() {
+    try {
+      var b = localStorage.getItem(LS_AVATAR_BACKUP);
+      if (b) { localStorage.setItem(LS_AVATAR, b); localStorage.removeItem(LS_AVATAR_BACKUP); }
+    } catch (e) {}
+  }
+
+  function logout() { clearUser(); restoreAvatar(); location.reload(); }
   window.bokunLogout = logout;
 
   /* ---------- 상단 로그인 영역 (스테이지 타이틀바 / 상점 헤더) ---------- */
