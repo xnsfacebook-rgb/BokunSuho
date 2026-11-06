@@ -7,9 +7,7 @@
    ----------------------------------------------------------------
    동작: 로그인하면 이름·이메일·프로필 사진만 localStorage에 저장
    (서버 없음 — 토큰 검증 없음, 가벼운 식별용). 로그아웃하면 삭제.
-   로그인하면 app.js가 본인 이름+사진으로 전면 좌석에 가상 캐릭터를 앉힌다.
-   환영 모달은 공개 사이트에서만 뜹니다 — localhost/OBS·Electron
-   스테이지에서는 뜨지 않아 방송 화면을 가리지 않습니다. */
+   환영 모달은 처음 들어올 때 한 번만 뜹니다. */
 (function () {
   'use strict';
 
@@ -51,31 +49,9 @@
   function logout() { clearUser(); location.reload(); }
   window.bokunLogout = logout;
 
-  /* ---------- 상단 로그인 영역 (스테이지 타이틀바 / 상점 헤더) ---------- */
+  /* ---------- 상단 로그인 영역 (블로그·상점 헤더의 #auth-area) ---------- */
   function paintAuthArea() {
     var user = loadUser();
-    /* 스테이지 타이틀바 */
-    var controls = document.querySelector('.window-controls');
-    if (controls) {
-      var old = document.getElementById('auth-area');
-      if (old) old.remove();
-      var span = document.createElement('span');
-      span.id = 'auth-area';
-      span.className = 'auth-area';
-      if (user) {
-        var img = user.picture
-          ? '<img class="auth-avatar" src="' + escapeHtml(user.picture) + '" alt="" referrerpolicy="no-referrer">'
-          : '<span class="auth-avatar auth-avatar-fallback">' + escapeHtml((user.name || '?').charAt(0)) + '</span>';
-        span.innerHTML = img +
-          '<span class="auth-name">' + escapeHtml(user.name) + '</span>' +
-          '<button class="win-btn auth-logout" type="button" onclick="bokunLogout()">로그아웃</button>';
-      } else {
-        span.innerHTML = '<button class="win-btn" type="button" onclick="bokunOpenLogin()">🔐 로그인</button>';
-      }
-      controls.insertBefore(span, controls.firstChild);
-      return;
-    }
-    /* 상점 페이지 헤더 */
     var slot = document.getElementById('auth-area');
     if (slot) {
       if (user) {
@@ -108,8 +84,7 @@
         '<p id="auth-setup-note" class="auth-setup-note" hidden>Google 로그인은 곧 준비됩니다.<br>관리자가 연동을 마치는 대로 이용할 수 있어요.</p>' +
         '<button class="auth-skip" type="button" id="auth-skip">나중에 하기</button>' +
       '</div>';
-    var host = document.querySelector('.stage-container') || document.body;
-    host.appendChild(div);
+    document.body.appendChild(div);
     div.addEventListener('click', function (e) { if (e.target === div) closeWelcome(); });
     var skip = document.getElementById('auth-skip');
     if (skip) skip.addEventListener('click', closeWelcome);
@@ -153,14 +128,9 @@
   }
 
   /* ---------- 시작 ---------- */
-  function isStageHost() {
-    var h = window.location.hostname;
-    return h === 'localhost' || h === '127.0.0.1' || h === '';
-  }
   function init() {
     paintAuthArea();
-    /* localhost = OBS·Electron 스테이지: 모달을 띄우지 않음 */
-    if (!loadUser() && !isStageHost()) {
+    if (!loadUser()) {
       var seen = false;
       try { seen = !!sessionStorage.getItem(SS_WELCOME); } catch (e) {}
       if (!seen) openWelcome();
