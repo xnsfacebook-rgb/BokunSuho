@@ -1,0 +1,100 @@
+/* 복운수호 상점 — 상품 목록 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --gold: #d4af37;
+  --gold-light: #f5d67a;
+  --dancheong-red: #a31621;
+  --ink: #060509;
+  --ink-soft: #120d0a;
+  --paper: #f5edd8;
+  --paper-dim: #cbbfa5;
+  --line: rgba(212, 175, 55, 0.3);
+}
+html, body { background: var(--ink); }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--paper);
+  min-height: 100vh;
+}
+
+/* ---------- 헤더 ---------- */
+.shop-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(18, 13, 10, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+.shop-header-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 16px;
+  height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.shop-back { color: var(--paper-dim); text-decoration: none; font-size: .85rem; white-space: nowrap; }
+.shop-back:hover { color: var(--gold-light); }
+.shop-brand { display: flex; align-items: center; gap: 8px; font-family: 'Noto Serif KR', serif; font-size: 1.2rem; letter-spacing: 2px; white-space: nowrap; }
+.shop-brand em { font-style: normal; color: var(--gold-light); }
+.shop-logo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 8px; }
+.shop-seal {
+  width: 32px; height: 32px; border-radius: 6px; background: var(--dancheong-red); color: var(--paper);
+  display: flex; align-items: center; justify-content: center; font-size: .9rem; font-weight: 700;
+}
+
+/* ---------- 로그인 영역 ---------- */
+.auth-area { display: flex; align-items: center; gap: 8px; flex-shrink: 0; min-width: 0; }
+.auth-login-btn {
+  background: transparent; border: 1px solid rgba(212, 175, 55, .7); color: var(--gold-light);
+  border-radius: 999px; padding: 6px 14px; font-size: .85rem; cursor: pointer; white-space: nowrap;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.auth-login-btn:hover { background: rgba(212, 175, 55, .15); }
+.auth-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(212, 175, 55, .6); flex-shrink: 0; }
+.auth-avatar-fallback { display: flex; align-items: center; justify-content: center; background: var(--gold); color: #2a1f08; font-weight: 700; font-size: .85rem; }
+.auth-name { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .85rem; }
+.auth-logout-btn { background: none; border: none; color: var(--paper-dim); font-size: .78rem; cursor: pointer; padding: 0; text-decoration: underline; white-space: nowrap; font-family: 'Noto Sans KR', sans-serif; }
+
+/* ---------- 본문 ---------- */
+.shop-main { max-width: 1080px; margin: 0 auto; padding: 40px 16px 60px; }
+.section-head { text-align: center; margin-bottom: 26px; }
+.kicker { color: var(--gold); letter-spacing: 4px; font-size: .78rem; font-weight: 700; margin-bottom: 8px; }
+.section-head h1 { font-family: 'Noto Serif KR', serif; font-size: 1.7rem; margin-bottom: 8px; }
+.section-head p { color: var(--paper-dim); font-size: .9rem; line-height: 1.7; }
+
+/* ---------- 필터 ---------- */
+.filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+.filter {
+  background: transparent; border: 1px solid var(--line); color: var(--paper-dim);
+  border-radius: 999px; padding: 7px 16px; font-size: .85rem; cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.filter:hover { border-color: var(--gold); color: var(--gold-light); }
+.filter.on { background: var(--gold); border-color: var(--gold); color: #241a05; font-weight: 700; }
+
+/* ---------- 상품 카드 ---------- */
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card {
+  background: var(--ink-soft); border: 1px solid rgba(212, 175, 55, .25); border-radius: 16px;
+  overflow: hidden; transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, .55); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.card .art { background: radial-gradient(circle at 50% 35%, #241c12 0%, #12100c 70%); aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.card .art img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+.card .body { padding: 18px; }
+.card .tag { display: inline-block; font-size: .72rem; letter-spacing: 2px; color: var(--gold); border: 1px solid rgba(212, 175, 55, .4); border-radius: 999px; padding: 2px 12px; margin-bottom: 10px; }
+.card h3 { font-family: 'Noto Serif KR', serif; font-size: 1.12rem; margin-bottom: 6px; }
+.card h3 a { color: var(--paper); text-decoration: none; }
+.card h3 a:hover { color: var(--gold-light); }
+.card .desc { font-size: .85rem; color: var(--paper-dim); margin-bottom: 12px; min-height: 2.8em; line-height: 1.6; }
+.card .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.card .price { font-weight: 800; font-size: 1.1rem; color: var(--gold-light); white-space: nowrap; }
+.card .buy {
+  background: linear-gradient(180deg, #e8c35a, #c9962e); color: #2a1f08; font-weight: 700;
+  padding: 8px 16px; border-radius: 999px; text-decoration: none; font-size: .85rem; white-space: nowrap;
+}
+.card .buy:hover { filter: brightness(1.08); }
+.shop-note { text-align: center; color: var(--paper-dim); font-size: .8rem; margin-top: 36px; line-height: 1.7; }
+
+@media (max-width: 860px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .section-head h1 { font-size: 1.4rem; }
+  .shop-back { font-size: .78rem; }
+  .shop-brand { font-size: 1.05rem; }
+}
