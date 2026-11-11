@@ -34,12 +34,97 @@
 </header>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-date" id="hero-date">오늘의 운세</div>
-    <h1>오늘, 당신의 운세는?</h1>
-    <p>내 띠를 눌러 오늘의 운세를 확인하세요. 행운의 색과 숫자까지 알려드립니다.</p>
-    <div class="zodiac-picker" id="zodiac-picker"></div>
-    <div class="fortune-result" id="fortune-result"></div>
+  <div class="hero-inner hero-split">
+    <div class="hero-copy">
+      <div class="hero-date" id="hero-date">오늘의 운세</div>
+      <h1>오늘, 당신의 운세는?</h1>
+      <p>내 띠를 눌러 오늘의 운세를 확인하세요. 행운의 색과 숫자까지 알려드립니다.</p>
+      <div class="zodiac-picker" id="zodiac-picker"></div>
+      <div class="fortune-result" id="fortune-result"></div>
+      <div class="hero-links">
+        <a href="tools/saju.html">📜 사주팔자</a>
+        <a href="tools/jami.html">⭐ 자미두수</a>
+        <a href="tools/juyeok.html">☯️ 주역</a>
+        <a href="posts/fortune-sticks.html">🎋 점괘 뽑기</a>
+      </div>
+    </div>
+  <div class="hnc-card" id="hnc-card">
+    <div class="hnc-head">
+      <div class="hnc-title">혼천의 · 삼합충</div>
+      <div class="hnc-clock" id="hnc-clock">⟳ 회전 중</div>
+    </div>
+    <div class="hnc-wheel" id="hnc-wheel">
+<svg viewBox="0 0 400 400" class="hnc-svg" role="img" aria-label="혼천의 — 12띠 삼합충 바퀴">
+      <g class="hnc-spin">
+        <circle cx="200" cy="200" r="196" class="hnc-ring-outer"/>
+        <line x1="200.0" y1="10.0" x2="200.0" y2="4.0" class="hnc-tick"/>
+      <line x1="295.0" y1="35.5" x2="298.0" y2="30.3" class="hnc-tick"/>
+      <line x1="364.5" y1="105.0" x2="369.7" y2="102.0" class="hnc-tick"/>
+      <line x1="390.0" y1="200.0" x2="396.0" y2="200.0" class="hnc-tick"/>
+      <line x1="364.5" y1="295.0" x2="369.7" y2="298.0" class="hnc-tick"/>
+      <line x1="295.0" y1="364.5" x2="298.0" y2="369.7" class="hnc-tick"/>
+      <line x1="200.0" y1="390.0" x2="200.0" y2="396.0" class="hnc-tick"/>
+      <line x1="105.0" y1="364.5" x2="102.0" y2="369.7" class="hnc-tick"/>
+      <line x1="35.5" y1="295.0" x2="30.3" y2="298.0" class="hnc-tick"/>
+      <line x1="10.0" y1="200.0" x2="4.0" y2="200.0" class="hnc-tick"/>
+      <line x1="35.5" y1="105.0" x2="30.3" y2="102.0" class="hnc-tick"/>
+      <line x1="105.0" y1="35.5" x2="102.0" y2="30.3" class="hnc-tick"/>
+        <text x="200.0" y="17.0" class="hnc-trigram">☰</text>
+      <text x="329.4" y="70.6" class="hnc-trigram">☱</text>
+      <text x="383.0" y="200.0" class="hnc-trigram">☲</text>
+      <text x="329.4" y="329.4" class="hnc-trigram">☳</text>
+      <text x="200.0" y="383.0" class="hnc-trigram">☴</text>
+      <text x="70.6" y="329.4" class="hnc-trigram">☵</text>
+      <text x="17.0" y="200.0" class="hnc-trigram">☶</text>
+      <text x="70.6" y="70.6" class="hnc-trigram">☷</text>
+      </g>
+      <circle cx="200" cy="200" r="150" class="hnc-ring-dot"/>
+      <circle cx="200" cy="200" r="112" class="hnc-ring-dot"/>
+      <g id="hnc-pattern" class="hnc-pattern">
+        <polygon points="200,32 345.5,284 54.5,284" class="hnc-triangle"/>
+        <line x1="200" y1="32" x2="200" y2="368" class="hnc-clash-line"/>
+        <circle cx="200" cy="32" r="5" class="hnc-dot-main"/>
+        <circle cx="345.5" cy="284" r="5" class="hnc-dot-trine"/>
+        <circle cx="54.5" cy="284" r="5" class="hnc-dot-trine"/>
+        <circle cx="200" cy="368" r="5" class="hnc-dot-clash"/>
+      </g>
+    </svg>
+    <button type="button" class="hnc-sign" data-sign="rat" aria-label="쥐띠"><span class="hnc-s-emoji">🐭</span><span class="hnc-s-name">쥐</span><span class="hnc-s-ji">자</span></button>
+    <button type="button" class="hnc-sign" data-sign="ox" aria-label="소띠"><span class="hnc-s-emoji">🐮</span><span class="hnc-s-name">소</span><span class="hnc-s-ji">축</span></button>
+    <button type="button" class="hnc-sign" data-sign="tiger" aria-label="호랑이띠"><span class="hnc-s-emoji">🐯</span><span class="hnc-s-name">호랑이</span><span class="hnc-s-ji">인</span></button>
+    <button type="button" class="hnc-sign" data-sign="rabbit" aria-label="토끼띠"><span class="hnc-s-emoji">🐰</span><span class="hnc-s-name">토끼</span><span class="hnc-s-ji">묘</span></button>
+    <button type="button" class="hnc-sign" data-sign="dragon" aria-label="용띠"><span class="hnc-s-emoji">🐲</span><span class="hnc-s-name">용</span><span class="hnc-s-ji">진</span></button>
+    <button type="button" class="hnc-sign" data-sign="snake" aria-label="뱀띠"><span class="hnc-s-emoji">🐍</span><span class="hnc-s-name">뱀</span><span class="hnc-s-ji">사</span></button>
+    <button type="button" class="hnc-sign" data-sign="horse" aria-label="말띠"><span class="hnc-s-emoji">🐴</span><span class="hnc-s-name">말</span><span class="hnc-s-ji">오</span></button>
+    <button type="button" class="hnc-sign" data-sign="sheep" aria-label="양띠"><span class="hnc-s-emoji">🐑</span><span class="hnc-s-name">양</span><span class="hnc-s-ji">미</span></button>
+    <button type="button" class="hnc-sign" data-sign="monkey" aria-label="원숭이띠"><span class="hnc-s-emoji">🐵</span><span class="hnc-s-name">원숭이</span><span class="hnc-s-ji">신</span></button>
+    <button type="button" class="hnc-sign" data-sign="rooster" aria-label="닭띠"><span class="hnc-s-emoji">🐔</span><span class="hnc-s-name">닭</span><span class="hnc-s-ji">유</span></button>
+    <button type="button" class="hnc-sign" data-sign="dog" aria-label="개띠"><span class="hnc-s-emoji">🐶</span><span class="hnc-s-name">개</span><span class="hnc-s-ji">술</span></button>
+    <button type="button" class="hnc-sign" data-sign="pig" aria-label="돼지띠"><span class="hnc-s-emoji">🐷</span><span class="hnc-s-name">돼지</span><span class="hnc-s-ji">해</span></button>
+      <div class="hnc-center">
+        <div class="hnc-c-trine" id="hnc-c-trine">신자진 수국</div>
+        <div class="hnc-c-name" id="hnc-c-name">🐭 쥐</div>
+        <div class="hnc-c-sub" id="hnc-c-sub">자(子) · 수(水) · 북방</div>
+        <div class="hnc-c-lucky" id="hnc-c-lucky">행운의 색 · 검정</div>
+      </div>
+    </div>
+    <div class="hnc-legend">
+      <span><i style="background:#8a6d3b"></i>본궁: <b id="lg-main">쥐 (자)</b></span>
+      <span><i style="background:#2f5d8a"></i>삼합: <b id="lg-trine">용 (진) · 원숭이 (신)</b></span>
+      <span><i style="background:#b03a2e"></i>충: <b id="lg-clash">말 (오)</b></span>
+    </div>
+    <div class="hnc-panel">
+      <div class="hnc-panel-head"><h3 id="hnc-panel-title">쥐 (자) · 신자진 수국</h3><span class="hnc-pill" id="hnc-panel-pill">수 · 1 · 6</span></div>
+      <p class="hnc-hint">12띠를 눌러 삼합·충의 흐름을 확인하세요</p>
+      <p id="hnc-read"></p>
+      <p class="hnc-line hn-trine" id="hnc-trine-line"></p>
+      <p class="hnc-line hn-clash" id="hnc-clash-line"></p>
+      <div class="hnc-panel-foot">
+        <a href="posts/fortune-2027.html#rat" id="hnc-zodiac-link">✦ 띠별 운세 자세히 보기 →</a>
+        <a class="btn btn-gold" href="tools/honcheonui.html">혼천의 자세히 보기 →</a>
+      </div>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -325,6 +410,7 @@
 <script src="products/images.js" defer></script>
   <script src="products/goods-images.js" defer></script>
 <script src="blog.js"></script>
+<script src="js/honcheonui.js"></script>
 <script src="auth.js"></script>
 </body>
 </html>

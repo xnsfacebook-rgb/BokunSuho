@@ -586,3 +586,25 @@ img { max-width: 100%; }
   .hnc-28grid { grid-template-columns: 1fr; }
   .hnc-clock { font-size: .72rem; }
 }
+
+/* ---------- hero 2열 (혼천의) ---------- */
+.hero-inner.hero-split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.02fr); gap: 30px; align-items: center; max-width: 1140px; text-align: left; padding: 30px 16px; }
+.hero-split .hero-copy { text-align: left; min-width: 0; }
+.hero-split .hero p { margin: 0 0 20px; max-width: none; }
+.hero-split .zodiac-picker { justify-content: flex-start; margin: 0; max-width: none; }
+.hero-split .zodiac-btn { width: 72px; }
+.hero-split .fortune-result { margin: 18px 0 0; max-width: none; }
+.hero-split .hnc-wheel { max-width: 440px; }
+.hero-split .hnc-card { padding: 16px 16px 20px; }
+.hero-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.hero-links a { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 14px; font-size: .85rem; font-weight: 700; color: var(--ink); }
+.hero-links a:hover { border-color: var(--red); color: var(--red); text-decoration: none; }
+@media (max-width: 860px) {
+  .hero-inner.hero-split { grid-template-columns: 1fr; gap: 22px; text-align: center; }
+  .hero-split .hero-copy { text-align: center; }
+  .hero-split .hero p { margin: 0 auto 20px; }
+  .hero-split .zodiac-picker { justify-content: center; margin: 0 auto; }
+  .hero-split .fortune-result { margin: 18px auto 0; }
+  .hero-split .hnc-wheel { max-width: 560px; }
+  .hero-links { justify-content: center; }
+}
