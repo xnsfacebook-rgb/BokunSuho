@@ -608,3 +608,16 @@ img { max-width: 100%; }
   .hero-split .hnc-wheel { max-width: 560px; }
   .hero-links { justify-content: center; }
 }
+
+.hero-tools { margin-top: 24px; }
+.hero-tools-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.hero-tools-head h2 { font-family: 'Noto Serif KR', serif; font-size: 1.15rem; margin: 0; }
+.hero-tools-head span { font-size: .85rem; color: var(--gold); font-weight: 700; }
+.hero-tool-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.hero-tool-grid .tool-card { padding: 14px; }
+.hero-tool-grid .tool-card .t-ico { font-size: 1.3rem; }
+@media (max-width: 860px) {
+  .hero-tools-head { justify-content: center; }
+  .hero-tool-grid .tool-card p { display: none; }
+  .hero-tool-grid .tool-card h3 { margin: 4px 0 0; }
+}
