@@ -359,6 +359,21 @@ function hncSelect(id){
   if(zl) zl.href = '../posts/fortune-2027.html#' + HNC_FORTUNE_ANCHOR[id];
 }
 
+let hncAutoOn = true;
+let hncAutoTimer = null;
+const HNC_AUTO_MS = 4500;
+function hncSetAuto(on){
+  hncAutoOn = on;
+  if(hncAutoTimer){ clearInterval(hncAutoTimer); hncAutoTimer = null; }
+  if(on && !document.hidden){
+    hncAutoTimer = setInterval(() => {
+      const cur = document.querySelector('.hnc-sign.is-main');
+      const idx = cur ? HNC_ORDER.indexOf(cur.getAttribute('data-sign')) : -1;
+      hncSelect(HNC_ORDER[(idx + 1) % 12]);
+    }, HNC_AUTO_MS);
+  }
+  hncTickClock();
+}
 function hncTickClock(){
   const el = document.getElementById('hnc-clock'); if(!el) return;
   try {
@@ -366,8 +381,8 @@ function hncTickClock(){
     const h = now.getHours(), m = String(now.getMinutes()).padStart(2, '0');
     const hi = Math.floor(((h + 1) % 24) / 2);
     const ji = HNC_HOURS[hi], han = HNC_JI[hi];
-    el.textContent = '⟳ 회전 중 · ' + h + ':' + m + ' · ' + ji + '시(' + han + '時) 한국시간';
-  } catch(e) { el.textContent = '⟳ 회전 중'; }
+    el.textContent = (hncAutoOn ? '⟳ 회전 중 · ' : '▶ 다시 회전 · ') + h + ':' + m + ' · ' + ji + '시(' + han + '時) 한국시간';
+  } catch(e) { el.textContent = hncAutoOn ? '⟳ 회전 중' : '▶ 다시 회전'; }
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -376,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const a = (-90 + i * 30) * Math.PI / 180;
     b.style.left = (50 + 42 * Math.cos(a)) + '%';
     b.style.top = (50 + 42 * Math.sin(a)) + '%';
-    b.addEventListener('click', () => hncSelect(b.getAttribute('data-sign')));
+    b.addEventListener('click', () => { hncSetAuto(false); hncSelect(b.getAttribute('data-sign')); });
   });
   // year finder
   const findBtn = document.getElementById('hnc-find');
@@ -386,10 +401,17 @@ document.addEventListener('DOMContentLoaded', function(){
     if(!y || y < 1900 || y > 2099){ if(msg) msg.textContent = '출생 연도를 1900–2099 사이로 입력해 주세요.'; return; }
     const id = hncSignByYear(y);
     if(msg) msg.textContent = y + '년생은 ' + HNC_BY_ID[id].emoji + ' ' + HNC_BY_ID[id].name + '띠(' + HNC_BY_ID[id].ji + ')입니다.';
+    hncSetAuto(false);
     hncSelect(id);
     document.getElementById('hnc-card').scrollIntoView({behavior: 'smooth', block: 'nearest'});
   });
   hncSelect('rat');
-  hncTickClock();
+  const pill = document.getElementById('hnc-clock');
+  if(pill) pill.addEventListener('click', () => hncSetAuto(!hncAutoOn));
+  document.addEventListener('visibilitychange', () => {
+    if(document.hidden){ if(hncAutoTimer){ clearInterval(hncAutoTimer); hncAutoTimer = null; } }
+    else if(hncAutoOn) hncSetAuto(true);
+  });
+  hncSetAuto(true);
   setInterval(hncTickClock, 30000);
 });
